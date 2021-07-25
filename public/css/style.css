@@ -19,9 +19,10 @@ section {
 
 main {
     background-color: brown;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 380px));
-    grid-gap: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
     min-height: calc(100vh - 100px);
     padding: 5vh;
     align-content: center;
@@ -29,6 +30,9 @@ main {
 }
 
 .cards {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 400px;
     border: 1px solid black;
     min-height: 250px;
     padding: 5px;
@@ -53,7 +57,7 @@ main {
 
 .textCard {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     background-color: yellowgreen;
     max-width: 100%;
     min-height: fit-content;
