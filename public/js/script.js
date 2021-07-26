@@ -30,11 +30,11 @@
                 formData.append("file", file);
 
                 axios.post("/upload", formData).then((results) => {
-                    this.images.push({
-                        url: results.data.name,
-                        username: username,
-                        title: title,
-                        description: desc,
+                    this.images.unshift({
+                        url: results.data.url,
+                        username: results.data.username,
+                        title: results.data.title,
+                        description: results.data.description,
                     });
                 });
             },

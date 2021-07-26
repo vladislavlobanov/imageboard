@@ -40,6 +40,6 @@ exports.upload = (req, res, next) => {
         })
         .catch((err) => {
             // uh oh
-            console.log(err);
+            console.log("Error in Amazon upload " + err);
         });
 };
