@@ -7,7 +7,7 @@ module.exports.getImages = () => {
 
 module.exports.insertImages = (title, description, username, filename) => {
     return db.query(
-        `INSERT INTO images (title, description, username, url) VALUES ($1,$2,$3,$4) RETURNING url;`,
+        `INSERT INTO images (title, description, username, url) VALUES ($1,$2,$3,$4) RETURNING title, description, username, url;`,
         [
             title,
             description,
