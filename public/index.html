@@ -12,26 +12,11 @@
             <section id="addImg">
                 <p>Add an image</p>
                 <label for="title">Title:</label>
-                <input
-                    v-model="title"
-                    type="text"
-                    id="title"
-                    :key="componentKey"
-                />
+                <input v-model="title" type="text" id="title" />
                 <label for="description">Description:</label>
-                <input
-                    v-model="description"
-                    type="text"
-                    id="description"
-                    :key="componentKey"
-                />
+                <input v-model="description" type="text" id="description" />
                 <label for="username">Username:</label>
-                <input
-                    v-model="username"
-                    type="text"
-                    id="username"
-                    :key="componentKey"
-                />
+                <input v-model="username" type="text" id="username" />
                 <input
                     type="file"
                     id="file"
@@ -52,11 +37,11 @@
             <main>
                 <div v-for="image in images" :key="image.id" class="cards">
                     <div class="insideCard">
-                        <div
-                            :style="{ 'background-image': 'url(' + image.url + ')' }"
-                            v-bind:alt="image.description"
+                        <img
+                            :alt="image.description"
                             class="imageCard"
-                        ></div>
+                            :src="image.url"
+                        />
                         <div class="textCard">{{image.title}}</div>
                     </div>
                 </div>

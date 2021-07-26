@@ -54,9 +54,8 @@ main {
 .imageCard {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    object-fit: scale-down;
-    background-position: center;
+    object-fit: cover;
+    object-position: center;
 }
 
 .textCard {

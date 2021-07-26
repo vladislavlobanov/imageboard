@@ -50,12 +50,17 @@
                             title: results.data.title,
                             description: results.data.description,
                         });
+
+                        this.url = "";
+                        this.username = "";
+                        this.title = "";
+                        this.description = "";
                         this.componentKey += 1;
                         this.showError = false;
                     })
                     .catch((err) => {
-                        this.showError = true;
                         console.log(err);
+                        this.showError = true;
                     });
             },
             handleFileSelection: function (e) {
