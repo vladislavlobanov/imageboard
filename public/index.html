@@ -12,27 +12,48 @@
             <section id="addImg">
                 <p>Add an image</p>
                 <label for="title">Title:</label>
-                <input v-model="title" type="text" id="title" />
+                <input
+                    v-model="title"
+                    type="text"
+                    id="title"
+                    :key="componentKey"
+                />
                 <label for="description">Description:</label>
-                <input v-model="description" type="text" id="description" />
+                <input
+                    v-model="description"
+                    type="text"
+                    id="description"
+                    :key="componentKey"
+                />
                 <label for="username">Username:</label>
-                <input v-model="username" type="text" id="username" />
-                <label for="file">File:</label>
+                <input
+                    v-model="username"
+                    type="text"
+                    id="username"
+                    :key="componentKey"
+                />
                 <input
                     type="file"
                     id="file"
                     accept="image/*"
                     @change="handleFileSelection"
+                    :key="componentKey"
                 />
                 <button @click="uploadImage()">Upload</button>
+                <p
+                    class="error"
+                    :style="{visibility: showError ? 'visible' : 'hidden'}"
+                >
+                    Please fill in title, description, username and choose a
+                    file not exceeding 2 megabytes
+                </p>
             </section>
             <section id="latest">Latest images</section>
-
             <main>
                 <div v-for="image in images" :key="image.id" class="cards">
                     <div class="insideCard">
                         <div
-                            v-bind:style="{ 'background-image': 'url(' + image.url + ')' }"
+                            :style="{ 'background-image': 'url(' + image.url + ')' }"
                             v-bind:alt="image.description"
                             class="imageCard"
                         ></div>

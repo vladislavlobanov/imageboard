@@ -72,3 +72,7 @@ main {
     padding-bottom: 5px;
     font-weight: 600;
 }
+
+.error {
+    visibility: hidden;
+}

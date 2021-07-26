@@ -7,6 +7,8 @@
             description: "",
             username: "",
             file: "",
+            componentKey: 0,
+            showError: false,
         },
         mounted: function () {
             axios
@@ -18,6 +20,16 @@
         },
         methods: {
             uploadImage: function () {
+                if (
+                    !this.file ||
+                    !this.title ||
+                    !this.description ||
+                    !this.username
+                ) {
+                    this.showError = true;
+                    return;
+                }
+
                 var title = this.title;
                 var desc = this.description;
                 var username = this.username;
@@ -29,14 +41,22 @@
                 formData.append("username", username);
                 formData.append("file", file);
 
-                axios.post("/upload", formData).then((results) => {
-                    this.images.unshift({
-                        url: results.data.url,
-                        username: results.data.username,
-                        title: results.data.title,
-                        description: results.data.description,
+                axios
+                    .post("/upload", formData)
+                    .then((results) => {
+                        this.images.unshift({
+                            url: results.data.url,
+                            username: results.data.username,
+                            title: results.data.title,
+                            description: results.data.description,
+                        });
+                        this.componentKey += 1;
+                        this.showError = false;
+                    })
+                    .catch((err) => {
+                        this.showError = true;
+                        console.log(err);
                     });
-                });
             },
             handleFileSelection: function (e) {
                 this.file = e.target.files[0];
