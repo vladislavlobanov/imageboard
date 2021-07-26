@@ -12,7 +12,12 @@ header {
     height: 50px;
 }
 
-section {
+#addImg {
+    background-color: blanchedalmond;
+    height: 100px;
+}
+
+#latest {
     background-color: green;
     height: 50px;
 }
@@ -23,7 +28,7 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1em;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 200px);
     padding: 5vh;
     align-content: center;
     justify-content: center;

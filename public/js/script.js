@@ -2,8 +2,11 @@
     new Vue({
         el: ".board",
         data: {
-            test: "hello",
             images: [],
+            title: "",
+            description: "",
+            username: "",
+            file: "",
         },
         mounted: function () {
             axios
@@ -12,6 +15,32 @@
                     this.images = data.reverse();
                 })
                 .catch((err) => console.log("err in /images: ", err));
+        },
+        methods: {
+            uploadImage: function () {
+                var title = this.title;
+                var desc = this.description;
+                var username = this.username;
+                var file = this.file;
+
+                var formData = new FormData();
+                formData.append("title", title);
+                formData.append("desc", desc);
+                formData.append("username", username);
+                formData.append("file", file);
+
+                axios.post("/upload", formData).then((results) => {
+                    this.images.push({
+                        url: results.data.name,
+                        username: username,
+                        title: title,
+                        description: desc,
+                    });
+                });
+            },
+            handleFileSelection: function (e) {
+                this.file = e.target.files[0];
+            },
         },
     });
 })();

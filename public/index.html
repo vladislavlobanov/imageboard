@@ -1,24 +1,46 @@
-
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Imageboard</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Imageboard</title>
         <link rel="stylesheet" href="/css/style.css" />
-</head>
+    </head>
     <body>
-        <header>I ❤️ PIXELS</header>
-        <section>Latest images</section>
+        <div class="board">
+            <header>I ❤️ PIXELS</header>
+            <section id="addImg">
+                <p>Add an image</p>
+                <label for="title">Title:</label>
+                <input v-model="title" type="text" id="title" />
+                <label for="description">Description:</label>
+                <input v-model="description" type="text" id="description" />
+                <label for="username">Username:</label>
+                <input v-model="username" type="text" id="username" />
+                <label for="file">File:</label>
+                <input
+                    type="file"
+                    id="file"
+                    accept="image/*"
+                    @change="handleFileSelection"
+                />
+                <button @click="uploadImage()">Upload</button>
+            </section>
+            <section id="latest">Latest images</section>
 
-        <main class="board">
-            <div v-for='image in images' :key='image.id' class="cards">
-            <div class="insideCard">
-                <div v-bind:style="{ 'background-image': 'url(' + image.url + ')' }" v-bind:alt="image.description" class="imageCard"></div>
-                <div class="textCard">{{image.title}}</div>
-            </div></div>
-        </main>
-
+            <main>
+                <div v-for="image in images" :key="image.id" class="cards">
+                    <div class="insideCard">
+                        <div
+                            v-bind:style="{ 'background-image': 'url(' + image.url + ')' }"
+                            v-bind:alt="image.description"
+                            class="imageCard"
+                        ></div>
+                        <div class="textCard">{{image.title}}</div>
+                    </div>
+                </div>
+            </main>
+        </div>
         <script src="/js/vue.js"></script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
