@@ -93,8 +93,7 @@ main {
 
 .modalWData {
     background-color: white;
-    min-width: 80%;
-    max-width: 95%;
+    width: 85.5%;
     min-height: fit-content;
     max-height: 100%;
     overflow: scroll;
