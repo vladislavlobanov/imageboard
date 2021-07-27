@@ -1,4 +1,29 @@
 (function () {
+    Vue.component("modal-img", {
+        template: "#modal-img-template",
+        props: ["imgId"],
+        data: function () {
+            return {
+                modalImgData: "",
+            };
+        },
+        mounted: function () {
+            axios
+                .get("/images")
+                .then(({ data }) => {
+                    this.modalImgData = data[this.imgId - 1];
+                })
+                .catch((err) =>
+                    console.log("err in component, /images: ", err)
+                );
+        },
+        methods: {
+            insideComponentClose: function () {
+                this.$emit("close");
+            },
+        },
+    });
+
     new Vue({
         el: ".board",
         data: {
@@ -9,6 +34,7 @@
             file: "",
             componentKey: 0,
             showError: false,
+            showModal: null,
         },
         mounted: function () {
             axios
@@ -65,6 +91,12 @@
             },
             handleFileSelection: function (e) {
                 this.file = e.target.files[0];
+            },
+            selectImg: function (id) {
+                this.showModal = id;
+            },
+            insideMainClose: function () {
+                this.showModal = null;
             },
         },
     });

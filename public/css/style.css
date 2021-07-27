@@ -44,7 +44,6 @@ main {
 }
 
 .insideCard {
-    background-color: white;
     width: 100%;
     min-height: 100%;
     display: grid;
@@ -63,7 +62,7 @@ main {
     align-items: flex-start;
     background-color: yellowgreen;
     max-width: 100%;
-    min-height: fit-content;
+    min-height: 35px;
     /* makign sure that if one long word entered, it won't go outside of div */
     word-break: break-all;
     white-space: pre-wrap;

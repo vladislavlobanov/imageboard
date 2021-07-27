@@ -35,7 +35,17 @@
             </section>
             <section id="latest">Latest images</section>
             <main>
-                <div v-for="image in images" :key="image.id" class="cards">
+                <modal-img
+                    v-if="showModal"
+                    :img-id="showModal"
+                    @close="insideMainClose"
+                ></modal-img>
+                <div
+                    v-for="image in images"
+                    :key="image.id"
+                    @click="selectImg(image.id)"
+                    class="cards"
+                >
                     <div class="insideCard">
                         <img
                             :alt="image.description"
@@ -47,6 +57,12 @@
                 </div>
             </main>
         </div>
+        <script id="modal-img-template" type="text/x-template">
+            <div class="modal">
+                <h1 @click="insideComponentClose">X</h1>
+                <h1 >TEST DATA: {{modalImgData.title}}</h1>
+            </div>
+        </script>
         <script src="/js/vue.js"></script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
