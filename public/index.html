@@ -8,6 +8,11 @@
     </head>
     <body>
         <div class="board">
+            <modal-img
+                v-if="showModal"
+                :img-id="showModal"
+                @close="insideMainClose"
+            ></modal-img>
             <header>I ❤️ PIXELS</header>
             <section id="addImg">
                 <p>Add an image</p>
@@ -35,11 +40,6 @@
             </section>
             <section id="latest">Latest images</section>
             <main>
-                <modal-img
-                    v-if="showModal"
-                    :img-id="showModal"
-                    @close="insideMainClose"
-                ></modal-img>
                 <div
                     v-for="image in images"
                     :key="image.id"
@@ -59,12 +59,26 @@
         </div>
         <script id="modal-img-template" type="text/x-template">
             <div class="modal">
-                <h1 @click="insideComponentClose">X</h1>
-                <h1 >TEST DATA: {{modalImgData.title}}</h1>
+                <div class="overlay">
+                       <div class="modalWData">
+                <div class="closeWrapper"><h1 class="closeEl" @click="insideComponentClose">X</h1></div>
+                <div class="modalContainer">
+                        <div class="modalImg"><img  :alt="modalImgData.description"
+                            :src="modalImgData.url" class="imageInside"></div>
+                        <div class="modalDesc">
+                            <h1>{{modalImgData.title}}</h1>
+                            <p>{{modalImgData.description}}</p>
+                            <p>Uploaded by {{modalImgData.username}} on {{modalImgData.created_at}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+                </div>
         </script>
         <script src="/js/vue.js"></script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
     </body>
 </html>
+<!-- 
+<h1>TEST DATA: {{modalImgData.title}}</h1> -->

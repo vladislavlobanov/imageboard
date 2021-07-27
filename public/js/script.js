@@ -12,6 +12,23 @@
                 .get("/images")
                 .then(({ data }) => {
                     this.modalImgData = data[this.imgId - 1];
+
+                    let d = new Date(this.modalImgData.created_at);
+
+                    var options = {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                        second: "numeric",
+                        hour12: false,
+                    };
+                    d = new Intl.DateTimeFormat("en-US", options)
+                        .format(d)
+                        .toString();
+
+                    this.modalImgData.created_at = d;
                 })
                 .catch((err) =>
                     console.log("err in component, /images: ", err)
