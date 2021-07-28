@@ -62,25 +62,25 @@
             </main>
         </div>
         <script id="modal-img-template" type="text/x-template">
-                        <div class="modal">
-                            <div class="overlay">
-                                   <div class="modalWData">
-                            <div class="closeWrapper"><h1 class="closeEl" @click="insideComponentClose">X</h1></div>
-                            <div class="modalContainer">
+            <div class="modal">
+                <div class="overlay">
+                       <div class="modalWData">
+                <div class="closeWrapper"><h1 class="closeEl" @click="insideComponentClose">X</h1></div>
+                <div class="modalContainer">
 
-                                    <div class="modalImg">
-            <img  :alt="modalImgData.description" :src="modalImgData.url" class="imageInside"></div>
-                                    <div class="modalDesc">
-                                        <h1>{{modalImgData.title}}</h1>
-                                        <p>{{modalImgData.description}}</p>
-                                        <p>Uploaded by {{modalImgData.username}} on {{modalImgData.created_at}}</p>
-                                        <comments-sect v-bind="$props"></comments-sect>
-                                    </div>
+                        <div class="modalImg">
+                            <img  :alt="modalImgData.description" :src="modalImgData.url" class="imageInside"></div>
+                            <div class="modalDesc">
+                            <h1>{{modalImgData.title}}</h1>
+                            <p>{{modalImgData.description}}</p>
+                            <p>Uploaded by {{modalImgData.username}} on {{modalImgData.created_at}}</p>
 
-                                </div>
-                            </div>
                         </div>
-                            </div>
+                        <comments-sect v-bind="$props"></comments-sect>
+                    </div>
+                </div>
+            </div>
+                </div>
         </script>
         <script id="comments-sect-template" type="text/x-template">
             <div>
@@ -96,7 +96,6 @@
                     v-for="comment in comments"
                     :key="comment.image_id"
                 >{{comment.comment_text}}, {{comment.username}}, {{comment.image_id}}, {{convertDate(comment.created_at)}}</div>
-
             </div>
         </script>
         <script src="/js/vue.js"></script>
@@ -104,5 +103,3 @@
         <script src="/js/script.js"></script>
     </body>
 </html>
-<!-- 
-<h1>TEST DATA: {{modalImgData.title}}</h1> -->

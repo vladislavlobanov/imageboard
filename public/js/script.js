@@ -174,7 +174,9 @@
                             id: results.data.id,
                         });
 
-                        this.images.pop();
+                        if (this.showButton == true) {
+                            this.images.pop();
+                        }
 
                         this.url = "";
                         this.username = "";
