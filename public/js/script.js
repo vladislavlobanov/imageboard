@@ -1,4 +1,76 @@
 (function () {
+    Vue.component("comments-sect", {
+        template: "#comments-sect-template",
+        props: ["imgId"],
+        data: function () {
+            return {
+                heading: "Comments",
+                comments: [],
+                username: "",
+                commentInput: "",
+                showCommentErr: false,
+                noComments: false,
+            };
+        },
+        mounted: function () {
+            axios
+                .get("/comments", {
+                    params: {
+                        imageId: this.imgId,
+                    },
+                })
+                .then((results) => {
+                    if (results.data.length == 0) {
+                        this.noComments = true;
+                        return;
+                    }
+                    this.comments = results.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        methods: {
+            sendComment: function () {
+                if (!this.commentInput || !this.username) {
+                    this.showCommentErr = true;
+                    return;
+                } else {
+                    this.showCommentErr = false;
+                }
+                axios
+                    .post("/comments", {
+                        user: this.username,
+                        comment: this.commentInput,
+                        id: this.imgId,
+                    })
+                    .then((results) => {
+                        this.comments.push(results.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            },
+
+            convertDate: function (dateToConvert) {
+                let d = new Date(dateToConvert);
+                var options = {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                    second: "numeric",
+                    hour12: false,
+                };
+                d = new Intl.DateTimeFormat("en-US", options)
+                    .format(d)
+                    .toString();
+                return d;
+            },
+        },
+    });
+
     Vue.component("modal-img", {
         template: "#modal-img-template",
         props: ["imgId", "arrNew"],
@@ -101,6 +173,8 @@
                             description: results.data.description,
                             id: results.data.id,
                         });
+
+                        this.images.pop();
 
                         this.url = "";
                         this.username = "";
