@@ -5,9 +5,11 @@ const db = require("../db");
 const { s3, uploader } = require("../middleware");
 
 router.get("/images", (req, res) => {
-    db.getImages().then((results) => {
-        res.json(results.rows);
-    });
+    db.getImages()
+        .then((results) => {
+            res.json(results.rows);
+        })
+        .catch((err) => console.log(err));
 });
 
 router.post("/upload", uploader.single("file"), s3.upload, function (req, res) {
@@ -23,7 +25,16 @@ router.post("/upload", uploader.single("file"), s3.upload, function (req, res) {
                 description: results.rows[0].description,
                 username: results.rows[0].username,
                 url: results.rows[0].url,
+                id: results.rows[0].id,
             });
+        })
+        .catch((err) => console.log(err));
+});
+
+router.get("/getmore", function (req, res) {
+    db.getNewSetImg(req.query.id)
+        .then((results) => {
+            res.json(results.rows);
         })
         .catch((err) => console.log(err));
 });

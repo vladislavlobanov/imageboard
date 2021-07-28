@@ -11,24 +11,33 @@
             axios
                 .get("/images")
                 .then(({ data }) => {
-                    this.modalImgData = data[this.imgId - 1];
+                    console.log(data);
 
-                    let d = new Date(this.modalImgData.created_at);
+                    //     for (let i = 0; i < data.length; i++) {
+                    //         if (data[i].id == this.imgId) {
+                    //             this.modalImgData = data[i];
 
-                    var options = {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                        hour: "numeric",
-                        minute: "numeric",
-                        second: "numeric",
-                        hour12: false,
-                    };
-                    d = new Intl.DateTimeFormat("en-US", options)
-                        .format(d)
-                        .toString();
+                    //             break;
+                    //         }
+                    //     }
 
-                    this.modalImgData.created_at = d;
+                    //     let d = new Date(this.modalImgData.created_at);
+
+                    //     var options = {
+                    //         year: "numeric",
+                    //         month: "long",
+                    //         day: "numeric",
+                    //         hour: "numeric",
+                    //         minute: "numeric",
+                    //         second: "numeric",
+                    //         hour12: false,
+                    //     };
+                    //     d = new Intl.DateTimeFormat("en-US", options)
+                    //         .format(d)
+                    //         .toString();
+
+                    //     this.modalImgData.created_at = d;
+                    //
                 })
                 .catch((err) =>
                     console.log("err in component, /images: ", err)
@@ -57,7 +66,7 @@
             axios
                 .get("/images")
                 .then(({ data }) => {
-                    this.images = data.reverse();
+                    this.images = data;
                 })
                 .catch((err) => console.log("err in /images: ", err));
         },
@@ -92,6 +101,7 @@
                             username: results.data.username,
                             title: results.data.title,
                             description: results.data.description,
+                            id: results.data.id,
                         });
 
                         this.url = "";
@@ -114,6 +124,28 @@
             },
             insideMainClose: function () {
                 this.showModal = null;
+            },
+            getLowestId: function () {
+                let newArr = [];
+                for (let i = 0; i < this.images.length; i++) {
+                    newArr.push(this.images[i].id);
+                }
+                let lowest = newArr.sort((a, b) => a - b)[0];
+
+                axios
+                    .get("/getmore", {
+                        params: {
+                            id: lowest,
+                        },
+                    })
+                    .then((results) => {
+                        for (let i = 0; i < results.data.length; i++) {
+                            this.images.push(results.data[i]);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             },
         },
     });

@@ -52,9 +52,10 @@
                             class="imageCard"
                             :src="image.url"
                         />
-                        <div class="textCard">{{image.title}}</div>
+                        <div class="textCard">{{image.title}},{{image.id}}</div>
                     </div>
                 </div>
+                <button @click="getLowestId()" id="moreImg">MORE</button>
             </main>
         </div>
         <script id="modal-img-template" type="text/x-template">
