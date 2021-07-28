@@ -11,6 +11,7 @@
             <modal-img
                 v-if="showModal"
                 :img-id="showModal"
+                :arr-new="images"
                 @close="insideMainClose"
             ></modal-img>
             <header>I ❤️ PIXELS</header>
@@ -55,7 +56,9 @@
                         <div class="textCard">{{image.title}},{{image.id}}</div>
                     </div>
                 </div>
-                <button @click="getLowestId()" id="moreImg">MORE</button>
+                <button v-if="showButton" @click="getLowestId()" id="moreImg">
+                    MORE
+                </button>
             </main>
         </div>
         <script id="modal-img-template" type="text/x-template">

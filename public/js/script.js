@@ -1,7 +1,7 @@
 (function () {
     Vue.component("modal-img", {
         template: "#modal-img-template",
-        props: ["imgId"],
+        props: ["imgId", "arrNew"],
         data: function () {
             return {
                 modalImgData: "",
@@ -9,35 +9,32 @@
         },
         mounted: function () {
             axios
-                .get("/images")
+                .get("/images", {
+                    params: {
+                        numEl: this.arrNew.length,
+                    },
+                })
                 .then(({ data }) => {
-                    console.log(data);
-
-                    //     for (let i = 0; i < data.length; i++) {
-                    //         if (data[i].id == this.imgId) {
-                    //             this.modalImgData = data[i];
-
-                    //             break;
-                    //         }
-                    //     }
-
-                    //     let d = new Date(this.modalImgData.created_at);
-
-                    //     var options = {
-                    //         year: "numeric",
-                    //         month: "long",
-                    //         day: "numeric",
-                    //         hour: "numeric",
-                    //         minute: "numeric",
-                    //         second: "numeric",
-                    //         hour12: false,
-                    //     };
-                    //     d = new Intl.DateTimeFormat("en-US", options)
-                    //         .format(d)
-                    //         .toString();
-
-                    //     this.modalImgData.created_at = d;
-                    //
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].id == this.imgId) {
+                            this.modalImgData = data[i];
+                            break;
+                        }
+                    }
+                    let d = new Date(this.modalImgData.created_at);
+                    var options = {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                        second: "numeric",
+                        hour12: false,
+                    };
+                    d = new Intl.DateTimeFormat("en-US", options)
+                        .format(d)
+                        .toString();
+                    this.modalImgData.created_at = d;
                 })
                 .catch((err) =>
                     console.log("err in component, /images: ", err)
@@ -61,6 +58,7 @@
             componentKey: 0,
             showError: false,
             showModal: null,
+            showButton: true,
         },
         mounted: function () {
             axios
@@ -141,6 +139,15 @@
                     .then((results) => {
                         for (let i = 0; i < results.data.length; i++) {
                             this.images.push(results.data[i]);
+                        }
+
+                        for (let i = 0; i < this.images.length; i++) {
+                            if (
+                                this.images[i].id ==
+                                this.images[this.images.length - 1].lowestId
+                            ) {
+                                this.showButton = false;
+                            }
                         }
                     })
                     .catch((err) => {

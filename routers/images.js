@@ -5,7 +5,7 @@ const db = require("../db");
 const { s3, uploader } = require("../middleware");
 
 router.get("/images", (req, res) => {
-    db.getImages()
+    db.getImages(req.query.numEl > 6 ? req.query.numEl : null)
         .then((results) => {
             res.json(results.rows);
         })

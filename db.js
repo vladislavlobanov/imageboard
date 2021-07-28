@@ -1,10 +1,19 @@
 var spicedPg = require("spiced-pg");
 var db = spicedPg("postgres:postgres:postgres@localhost:5432/imageboard");
 
-module.exports.getImages = () => {
-    return db.query(`SELECT * FROM images 
+module.exports.getImages = (arg) => {
+    if (!arg) {
+        return db.query(`SELECT * FROM images 
                     ORDER BY id DESC
-                    LIMIT 3;`);
+                    LIMIT 6;`);
+    } else {
+        return db.query(
+            `SELECT * FROM images 
+                    ORDER BY id DESC
+                    LIMIT $1;`,
+            [arg]
+        );
+    }
 };
 
 module.exports.insertImages = (title, description, username, filename) => {
@@ -29,7 +38,7 @@ module.exports.getNewSetImg = (lastId) => {
             ) AS "lowestId" FROM images
             WHERE id < $1
             ORDER BY id DESC
-            LIMIT 3;`,
+            LIMIT 6;`,
         [lastId]
     );
 };
