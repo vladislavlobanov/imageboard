@@ -76,7 +76,7 @@
                             <p>Uploaded by {{modalImgData.username}} on {{modalImgData.created_at}}</p>
 
                         </div>
-                        <!-- <comments-sect v-bind="$props"></comments-sect> -->
+                        <comments-sect v-bind="$props"></comments-sect>
                     </div>
                 </div>
             </div>
@@ -85,8 +85,8 @@
         <script id="comments-sect-template" type="text/x-template">
             <div>
                 <h1>{{ heading }}</h1>
-                <label for="username">Username:</label>
-                <input v-model="username" type="text" id="username" />
+                <label for="usernameComment">Username:</label>
+                <input v-model="username" type="text" id="usernameComment" />
                 <label for="commentInput">Comment:</label>
                 <input v-model="commentInput" type="text" id="commentInput" />
                 <p v-if="showCommentErr">Please provide your username and a comment before sending</p>
@@ -94,8 +94,8 @@
                 <p v-if="noComments">No comments</p>
                  <div
                     v-for="comment in comments"
-                    :key="comment.image_id"
-                >{{comment.comment_text}}, {{comment.username}}, {{comment.image_id}}, {{convertDate(comment.created_at)}}</div>
+                    :key="comment.id"
+                >{{comment.comment_text}}, {{comment.username}}, {{convertDate(comment.created_at)}}</div>
             </div>
         </script>
         <script src="/js/vue.js"></script>
