@@ -17,30 +17,38 @@
             <header><h1>Welcome to 80's</h1></header>
             <section id="addImg">
                 <p>Add an image</p>
-                <div>
-                    <label for="title">Title:</label>
-                    <input v-model="title" type="text" id="title" />
-                </div>
+                <div class="insideAdd">
+                    <div>
+                        <label for="title">Title:</label>
+                        <input v-model="title" type="text" id="title" />
+                    </div>
 
-                <div>
-                    <label for="description">Description:</label>
-                    <input v-model="description" type="text" id="description" />
+                    <div>
+                        <label for="description">Description:</label>
+                        <input
+                            v-model="description"
+                            type="text"
+                            id="description"
+                        />
+                    </div>
+                    <div>
+                        <label for="username">Your name:</label>
+                        <input v-model="username" type="text" id="username" />
+                    </div>
                 </div>
-                <div>
-                    <label for="username">Your name:</label>
-                    <input v-model="username" type="text" id="username" />
+                <div class="insideAdd">
+                    <input
+                        type="file"
+                        id="file"
+                        accept="image/*"
+                        @change="handleFileSelection"
+                        :key="componentKey"
+                    />
+                    <button class="btnStyle" @click="uploadImage()">
+                        Upload
+                    </button>
                 </div>
-
-                <input
-                    type="file"
-                    id="file"
-                    accept="image/*"
-                    @change="handleFileSelection"
-                    :key="componentKey"
-                />
-                <button @click="uploadImage()">Upload</button>
-
-                <p class="error" v-if="showError">
+                <p v-if="showError" :style="{'text-align': 'center'}">
                     Please fill in title, description, username and choose a
                     file not exceeding 2 megabytes
                 </p>

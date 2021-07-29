@@ -63,24 +63,29 @@ header h1 {
     height: fit-content;
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     text-transform: uppercase;
     font-weight: bold;
     gap: 10px;
+    align-items: center;
+}
+.insideAdd {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    align-content: center;
 }
 
-input {
+.insideAdd input {
     outline: 0;
     border-width: 0 0 3px;
     border-color: white;
     background: transparent;
     font-size: 17px;
     width: 200px;
+    margin-right: 20px;
 }
-input:focus {
+.insideAdd input:focus {
     border-color: purple;
 }
 
@@ -103,8 +108,22 @@ main {
 }
 
 button {
-    width: fit-content;
+    font-size: 20px;
+    font-weight: 900;
+    width: 200px;
+    border-radius: 4px;
+    cursor: pointer;
 }
+
+/* .btnStyle {
+    background-color: transparent;
+    border: 2px solid pink;
+    color: white;
+    box-shadow: 0px 0px 10px 3px #ff94b8, inset 0px 0px 10px 3px #ff94b8;
+    border-color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff94b8,
+        0 0 40px #ff94b8, 0 0 50px #ff94b8, 0 0 60px #ff94b8, 0 0 70px #ff94b8;
+} */
 
 .cards {
     flex-grow: 0;
