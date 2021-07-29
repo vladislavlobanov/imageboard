@@ -1,75 +1,75 @@
 (function () {
-    Vue.component("comments-sect", {
-        template: "#comments-sect-template",
-        props: ["imgId"],
-        data: function () {
-            return {
-                heading: "Comments",
-                comments: [],
-                username: "",
-                commentInput: "",
-                showCommentErr: false,
-                noComments: false,
-            };
-        },
-        mounted: function () {
-            axios
-                .get("/comments", {
-                    params: {
-                        imageId: this.imgId,
-                    },
-                })
-                .then((results) => {
-                    if (results.data.length == 0) {
-                        this.noComments = true;
-                        return;
-                    }
-                    this.comments = results.data;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
-        methods: {
-            sendComment: function () {
-                if (!this.commentInput || !this.username) {
-                    this.showCommentErr = true;
-                    return;
-                } else {
-                    this.showCommentErr = false;
-                }
-                axios
-                    .post("/comments", {
-                        user: this.username,
-                        comment: this.commentInput,
-                        id: this.imgId,
-                    })
-                    .then((results) => {
-                        this.comments.push(results.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            },
+    // Vue.component("comments-sect", {
+    //     template: "#comments-sect-template",
+    //     props: ["imgId"],
+    //     data: function () {
+    //         return {
+    //             heading: "Comments",
+    //             comments: [],
+    //             username: "",
+    //             commentInput: "",
+    //             showCommentErr: false,
+    //             noComments: false,
+    //         };
+    //     },
+    //     mounted: function () {
+    //         axios
+    //             .get("/comments", {
+    //                 params: {
+    //                     imageId: this.imgId,
+    //                 },
+    //             })
+    //             .then((results) => {
+    //                 if (results.data.length == 0) {
+    //                     this.noComments = true;
+    //                     return;
+    //                 }
+    //                 this.comments = results.data;
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err);
+    //             });
+    //     },
+    //     methods: {
+    //         sendComment: function () {
+    //             if (!this.commentInput || !this.username) {
+    //                 this.showCommentErr = true;
+    //                 return;
+    //             } else {
+    //                 this.showCommentErr = false;
+    //             }
+    //             axios
+    //                 .post("/comments", {
+    //                     user: this.username,
+    //                     comment: this.commentInput,
+    //                     id: this.imgId,
+    //                 })
+    //                 .then((results) => {
+    //                     this.comments.push(results.data);
+    //                 })
+    //                 .catch((err) => {
+    //                     console.log(err);
+    //                 });
+    //         },
 
-            convertDate: function (dateToConvert) {
-                let d = new Date(dateToConvert);
-                var options = {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "numeric",
-                    second: "numeric",
-                    hour12: false,
-                };
-                d = new Intl.DateTimeFormat("en-US", options)
-                    .format(d)
-                    .toString();
-                return d;
-            },
-        },
-    });
+    //         convertDate: function (dateToConvert) {
+    //             let d = new Date(dateToConvert);
+    //             var options = {
+    //                 year: "numeric",
+    //                 month: "long",
+    //                 day: "numeric",
+    //                 hour: "numeric",
+    //                 minute: "numeric",
+    //                 second: "numeric",
+    //                 hour12: false,
+    //             };
+    //             d = new Intl.DateTimeFormat("en-US", options)
+    //                 .format(d)
+    //                 .toString();
+    //             return d;
+    //         },
+    //     },
+    // });
 
     Vue.component("modal-img", {
         template: "#modal-img-template",
@@ -77,22 +77,31 @@
         data: function () {
             return {
                 modalImgData: "",
+                mdlShow: true,
             };
         },
         mounted: function () {
             axios
                 .get("/images", {
                     params: {
-                        numEl: this.arrNew.length,
+                        numEl: this.imgId,
                     },
                 })
                 .then(({ data }) => {
+                    //clean this (not necessary to have a loop for one item, arrNew not necessary anymore)
+
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].id == this.imgId) {
                             this.modalImgData = data[i];
                             break;
                         }
                     }
+
+                    if (this.modalImgData == []) {
+                        this.mdlShow = false;
+                        return;
+                    }
+
                     let d = new Date(this.modalImgData.created_at);
                     var options = {
                         year: "numeric",
@@ -108,13 +117,56 @@
                         .toString();
                     this.modalImgData.created_at = d;
                 })
-                .catch((err) =>
-                    console.log("err in component, /images: ", err)
-                );
+                .catch((err) => {
+                    console.log("err in component, /images: ", err);
+                });
         },
         methods: {
             insideComponentClose: function () {
                 this.$emit("close");
+            },
+        },
+        watch: {
+            imgId: function () {
+                axios
+                    .get("/images", {
+                        params: {
+                            numEl: this.imgId,
+                        },
+                    })
+                    .then(({ data }) => {
+                        //clean this (not necessary to have a loop for one item, arrNew not necessary anymore)
+
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].id == this.imgId) {
+                                this.modalImgData = data[i];
+                                break;
+                            }
+                        }
+
+                        if (this.modalImgData == []) {
+                            this.mdlShow = false;
+                            return;
+                        }
+
+                        let d = new Date(this.modalImgData.created_at);
+                        var options = {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                            second: "numeric",
+                            hour12: false,
+                        };
+                        d = new Intl.DateTimeFormat("en-US", options)
+                            .format(d)
+                            .toString();
+                        this.modalImgData.created_at = d;
+                    })
+                    .catch((err) => {
+                        console.log("err in component, /images: ", err);
+                    });
             },
         },
     });
@@ -129,10 +181,14 @@
             file: "",
             componentKey: 0,
             showError: false,
-            showModal: null,
+            showModal: location.hash.slice(1),
             showButton: true,
         },
         mounted: function () {
+            addEventListener("hashchange", () => {
+                this.showModal = location.hash.slice(1);
+            });
+
             axios
                 .get("/images")
                 .then(({ data }) => {
@@ -193,11 +249,11 @@
             handleFileSelection: function (e) {
                 this.file = e.target.files[0];
             },
-            selectImg: function (id) {
-                this.showModal = id;
-            },
+            // selectImg: function (id) {
+            //     this.showModal = id;
+            // },
             insideMainClose: function () {
-                this.showModal = null;
+                location.hash = "";
             },
             getLowestId: function () {
                 let newArr = [];

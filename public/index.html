@@ -41,10 +41,10 @@
             </section>
             <section id="latest">Latest images</section>
             <main>
-                <div
+                <a
                     v-for="image in images"
                     :key="image.id"
-                    @click="selectImg(image.id)"
+                    :href="'#' + image.id"
                     class="cards"
                 >
                     <div class="insideCard">
@@ -55,14 +55,14 @@
                         />
                         <div class="textCard">{{image.title}},{{image.id}}</div>
                     </div>
-                </div>
+                </a>
                 <button v-if="showButton" @click="getLowestId()" id="moreImg">
                     MORE
                 </button>
             </main>
         </div>
         <script id="modal-img-template" type="text/x-template">
-            <div class="modal">
+            <div v-if="mdlShow" class="modal">
                 <div class="overlay">
                        <div class="modalWData">
                 <div class="closeWrapper"><h1 class="closeEl" @click="insideComponentClose">X</h1></div>
@@ -76,7 +76,7 @@
                             <p>Uploaded by {{modalImgData.username}} on {{modalImgData.created_at}}</p>
 
                         </div>
-                        <comments-sect v-bind="$props"></comments-sect>
+                        <!-- <comments-sect v-bind="$props"></comments-sect> -->
                     </div>
                 </div>
             </div>
@@ -103,14 +103,3 @@
         <script src="/js/script.js"></script>
     </body>
 </html>
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, earum optio
-distinctio nam porro, voluptatem nobis, et sint officiis error consequuntur quam
-esse itaque maiores saepe. Sunt, quaerat ipsa? Officiis ullam similique esse
-harum eum facere, perspiciatis ipsam nesciunt reprehenderit sapiente ipsum
-tempora quis ad ab accusamus tenetur fugit provident quibusdam labore vitae
-assumenda suscipit animi iure. Sint itaque minus atque fuga quo tempora!
-Aspernatur voluptate, nostrum repellat sint libero nihil id! Corporis eius
-doloremque consequuntur quas quae, earum quibusdam rem ea magni vero ipsam,
-blanditiis officiis, alias amet. Sunt assumenda hic nobis obcaecati beatae
-numquam amet reiciendis quis rem.

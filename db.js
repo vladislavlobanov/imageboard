@@ -9,8 +9,7 @@ module.exports.getImages = (arg) => {
     } else {
         return db.query(
             `SELECT * FROM images 
-                    ORDER BY id DESC
-                    LIMIT $1;`,
+            WHERE id = $1;`,
             [arg]
         );
     }
