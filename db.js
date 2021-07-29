@@ -43,7 +43,10 @@ module.exports.getNewSetImg = (lastId) => {
 };
 
 module.exports.getComments = (id) => {
-    return db.query(`SELECT * FROM comments WHERE image_id = ($1);`, [id]);
+    return db.query(
+        `SELECT * FROM comments WHERE image_id = ($1) ORDER BY id DESC;`,
+        [id]
+    );
 };
 
 module.exports.sendComment = (comment, user, img) => {

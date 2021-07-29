@@ -174,7 +174,7 @@ button {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(55, 55, 55, 0.55);
+    background-color: rgba(59, 79, 255, 0.493);
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -189,21 +189,27 @@ button {
     min-height: fit-content;
     max-height: 100%;
     overflow: scroll;
+    box-shadow: 0px 0px 10px 3px #ff94b8, inset 0px 0px 10px 3px #ff94b8;
+    border-color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff94b8,
+        0 0 40px #ff94b8, 0 0 50px #ff94b8, 0 0 60px #ff94b8, 0 0 70px #ff94b8;
+    border-radius: 5px;
 }
 
 .closeWrapper {
-    overflow: scroll;
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    background-color: yellow;
+    background-color: rgba(255, 239, 20, 0.842);
 }
 
 .closeEl {
     cursor: pointer;
-    background-color: darksalmon;
+
     display: block;
     width: fit-content;
+    padding-right: 10px;
+    color: purple;
 }
 
 .modalContainer {
@@ -211,13 +217,14 @@ button {
     flex-wrap: wrap;
     height: fit-content;
     width: 100%;
-    background-color: deeppink;
+    background-color: rgba(255, 68, 199, 0.842);
+    gap: 10px;
 }
 
 .modalImg {
     width: 30vh;
     height: 50vh;
-    background-color: darkseagreen;
+    background-color: rgba(255, 239, 20, 0.842);
 }
 
 .imageInside {
@@ -227,7 +234,11 @@ button {
 }
 
 .modalDesc {
-    background-color: darkslategrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     /* makign sure that if one long word entered, it won't go outside of div */
     word-break: break-all;
     white-space: pre-wrap;
@@ -237,4 +248,33 @@ button {
 .modalDesc {
     flex: 1;
     flex-basis: 400px;
+}
+
+.commSec {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.commSec input {
+    outline: 0;
+    border-width: 0 0 3px;
+    border-color: white;
+    background: transparent;
+    font-size: 17px;
+    width: 200px;
+    margin-right: 20px;
+}
+.commSec input:focus {
+    border-color: purple;
+}
+
+label {
+    display: inline-block;
+    width: 140px;
+    text-align: left;
+    font-weight: bolder;
 }

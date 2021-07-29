@@ -85,6 +85,7 @@
                         <div class="modalImg">
                             <img  :alt="modalImgData.description" :src="modalImgData.url" class="imageInside"></div>
                             <div class="modalDesc">
+
                             <h1>{{modalImgData.title}}</h1>
                             <p>{{modalImgData.description}}</p>
                             <p>Uploaded by {{modalImgData.username}} on {{modalImgData.created_at}}</p>
@@ -97,14 +98,20 @@
                 </div>
         </script>
         <script id="comments-sect-template" type="text/x-template">
-            <div>
-                <h1>{{ heading }}</h1>
+            <div class="commSec">
+                <p>Send a comment</p>
+
+                <div>
                 <label for="usernameComment">Username:</label>
                 <input v-model="username" type="text" id="usernameComment" />
+                </div>
+                <div>
                 <label for="commentInput">Comment:</label>
                 <input v-model="commentInput" type="text" id="commentInput" />
-                <p v-if="showCommentErr">Please provide your username and a comment before sending</p>
+                </div>
                 <button @click="sendComment()">Send</button>
+
+                <p v-if="showCommentErr">Please provide your username and a comment before sending</p>
                 <p v-if="noComments">No comments</p>
                  <div
                     v-for="comment in comments"

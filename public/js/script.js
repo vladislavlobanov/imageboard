@@ -4,7 +4,6 @@
         props: ["imgId"],
         data: function () {
             return {
-                heading: "Comments",
                 comments: [],
                 username: "",
                 commentInput: "",
