@@ -1,6 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
+/* @font-face {
+    font-family: logoFont;
+    src: url(/css/Streamster.ttf);
+} */
+
 * {
     margin: 0;
     box-sizing: border-box;
+    font-family: "Audiowide", cursive;
 }
 
 body {
@@ -8,13 +16,72 @@ body {
 }
 
 header {
-    background-color: yellow;
-    height: 50px;
+    background-image: url("/assets/header.jpg");
+    background-size: cover;
+    background-position: top;
+    height: 150px;
+    /* font-family: logoFont; */
+    font-weight: 900;
+    letter-spacing: 5px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: flicker 1.5s infinite alternate;
+}
+
+header h1 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 7vh;
+    text-align: center;
+}
+
+@keyframes flicker {
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080,
+            0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080,
+            0 0 75px #ff0080;
+    }
+
+    20%,
+    24%,
+    55% {
+        text-shadow: none;
+    }
 }
 
 #addImg {
-    background-color: blanchedalmond;
-    height: 100px;
+    background-color: moccasin;
+    padding: 20px;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-transform: uppercase;
+    font-weight: bold;
+    gap: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+input {
+    outline: 0;
+    border-width: 0 0 3px;
+    border-color: white;
+    background: transparent;
+    font-size: 17px;
+    width: 200px;
+}
+input:focus {
+    border-color: purple;
 }
 
 #latest {
@@ -23,7 +90,8 @@ header {
 }
 
 main {
-    background-color: brown;
+    background-color: #d4418e;
+    background-image: linear-gradient(315deg, #d4418e 0%, #0652c5 74%);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -35,7 +103,7 @@ main {
 }
 
 button {
-    width: 100%;
+    width: fit-content;
 }
 
 .cards {
@@ -74,10 +142,6 @@ button {
     padding-top: 5px;
     padding-bottom: 5px;
     font-weight: 600;
-}
-
-.error {
-    visibility: hidden;
 }
 
 .overlay {

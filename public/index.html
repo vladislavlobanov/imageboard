@@ -3,7 +3,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My Imageboard</title>
+        <title>80's Hello</title>
         <link rel="stylesheet" href="/css/style.css" />
     </head>
     <body>
@@ -14,15 +14,23 @@
                 :arr-new="images"
                 @close="insideMainClose"
             ></modal-img>
-            <header>I ❤️ PIXELS</header>
+            <header><h1>Welcome to 80's</h1></header>
             <section id="addImg">
                 <p>Add an image</p>
-                <label for="title">Title:</label>
-                <input v-model="title" type="text" id="title" />
-                <label for="description">Description:</label>
-                <input v-model="description" type="text" id="description" />
-                <label for="username">Username:</label>
-                <input v-model="username" type="text" id="username" />
+                <div>
+                    <label for="title">Title:</label>
+                    <input v-model="title" type="text" id="title" />
+                </div>
+
+                <div>
+                    <label for="description">Description:</label>
+                    <input v-model="description" type="text" id="description" />
+                </div>
+                <div>
+                    <label for="username">Your name:</label>
+                    <input v-model="username" type="text" id="username" />
+                </div>
+
                 <input
                     type="file"
                     id="file"
@@ -31,10 +39,8 @@
                     :key="componentKey"
                 />
                 <button @click="uploadImage()">Upload</button>
-                <p
-                    class="error"
-                    :style="{visibility: showError ? 'visible' : 'hidden'}"
-                >
+
+                <p class="error" v-if="showError">
                     Please fill in title, description, username and choose a
                     file not exceeding 2 megabytes
                 </p>
