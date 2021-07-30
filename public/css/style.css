@@ -232,23 +232,24 @@ button {
 }
 
 .modalContainer {
-    display: grid;
-    grid-template-rows: 0.4fr 0.3fr 1fr;
-    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
     width: 100%;
     background-color: rgba(255, 68, 199, 0.842);
     gap: 10px;
 }
 
 .modalImg {
-    height: 100%;
-    max-width: 100%;
+    width: 30vh;
+    height: 50vh;
+    background-color: rgba(255, 239, 20, 0.842);
 }
 
-.photo > img {
-    object-fit: cover;
+.imageInside {
     width: 100%;
-    max-height: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .modalDesc {
@@ -260,6 +261,12 @@ button {
     /* makign sure that if one long word entered, it won't go outside of div */
     word-break: break-all;
     white-space: pre-wrap;
+}
+
+.modalImg,
+.modalDesc {
+    flex: 1;
+    flex-basis: 400px;
 }
 
 .commSec {
