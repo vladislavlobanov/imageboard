@@ -16,7 +16,7 @@
             ></modal-img>
             <header><h1>Welcome to 80's</h1></header>
             <section id="addImg">
-                <p>Add an image</p>
+                <p>Add image</p>
                 <div class="insideAdd">
                     <div>
                         <label for="title">Title:</label>
@@ -44,15 +44,21 @@
                         @change="handleFileSelection"
                         :key="componentKey"
                     />
+                </div>
+                <div class="insideAdd">
                     <button class="btnStyle" @click="uploadImage()">
                         Upload
                     </button>
                 </div>
-                <p v-if="showError" :style="{'text-align': 'center'}">
+                <p
+                    v-if="showError"
+                    :style="{'text-align': 'center', 'color': 'red'}"
+                >
                     Please fill in title, description, username and choose a
                     file not exceeding 2 megabytes
                 </p>
             </section>
+
             <section id="latest">Latest images</section>
             <main>
                 <a
@@ -67,7 +73,7 @@
                             class="imageCard"
                             :src="image.url"
                         />
-                        <div class="textCard">{{image.title}},{{image.id}}</div>
+                        <div class="textCard">{{image.title}}</div>
                     </div>
                 </a>
                 <button v-if="showButton" @click="getLowestId()" id="moreImg">
@@ -86,8 +92,8 @@
                             <img  :alt="modalImgData.description" :src="modalImgData.url" class="imageInside"></div>
                             <div class="modalDesc">
 
-                            <h1>{{modalImgData.title}}</h1>
-                            <p>{{modalImgData.description}}</p>
+                            <h1>Title: {{modalImgData.title}}</h1>
+                            <p>Description: {{modalImgData.description}}</p>
                             <p>Uploaded by {{modalImgData.username}} on {{modalImgData.created_at}}</p>
 
                         </div>
@@ -111,12 +117,12 @@
                 </div>
                 <button @click="sendComment()">Send</button>
 
-                <p v-if="showCommentErr">Please provide your username and a comment before sending</p>
-                <p v-if="noComments">No comments</p>
+                <p v-if="showCommentErr" :style="{'color': 'red'}">Please provide your username and a comment before sending</p>
+                <p v-if="noComments" style="font-weight: bold">No comments</p>
                  <div
                     v-for="comment in comments"
                     :key="comment.id"
-                >{{comment.comment_text}}, {{comment.username}}, {{convertDate(comment.created_at)}}</div>
+                >"{{comment.comment_text}}," said "{{comment.username}}"" on {{convertDate(comment.created_at)}}</div>
             </div>
         </script>
         <script src="/js/vue.js"></script>
