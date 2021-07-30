@@ -89,7 +89,8 @@
                 <div class="modalContainer">
 
                         <div class="modalImg">
-                            <img  :alt="modalImgData.description" :src="modalImgData.url" class="imageInside"></div>
+                            <img  :alt="modalImgData.description" :src="modalImgData.url" class="imageInside">
+                        </div>
                             <div class="modalDesc">
 
                             <h1>Title: {{modalImgData.title}}</h1>
@@ -106,7 +107,6 @@
         <script id="comments-sect-template" type="text/x-template">
             <div class="commSec">
                 <p>Send a comment</p>
-
                 <div>
                 <label for="usernameComment">Username:</label>
                 <input v-model="username" type="text" id="usernameComment" />
