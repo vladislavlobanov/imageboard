@@ -23,6 +23,8 @@
                         this.noComments = true;
                         return;
                     }
+
+                    this.noComments = false;
                     this.comments = results.data;
                 })
                 .catch((err) => {
@@ -44,6 +46,7 @@
                         id: this.imgId,
                     })
                     .then((results) => {
+                        this.noComments = false;
                         this.comments.push(results.data);
                     })
                     .catch((err) => {
@@ -192,6 +195,14 @@
                 .get("/images")
                 .then(({ data }) => {
                     this.images = data;
+
+                    // for (var i = 0; i < data.length; i++) {
+                    //     ((i) => {
+                    //         setTimeout(() => {
+                    //             this.images.push(data[i]);
+                    //         }, i * 200);
+                    //     })(i);
+                    // }
                 })
                 .catch((err) => console.log("err in /images: ", err));
         },
@@ -273,6 +284,14 @@
                         for (let i = 0; i < results.data.length; i++) {
                             this.images.push(results.data[i]);
                         }
+
+                        // for (var i = 0; i < results.data.length; i++) {
+                        //     ((i) => {
+                        //         setTimeout(() => {
+                        //             this.images.push(results.data[i]);
+                        //         }, i * 200);
+                        //     })(i);
+                        // }
 
                         for (let i = 0; i < this.images.length; i++) {
                             if (
