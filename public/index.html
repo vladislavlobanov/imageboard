@@ -19,12 +19,14 @@
                 <p>Add image</p>
                 <div class="insideAdd">
                     <div>
-                        <label for="title">Title:</label>
+                        <label for="title" class="labelSize">Title:</label>
                         <input v-model="title" type="text" id="title" />
                     </div>
 
                     <div>
-                        <label for="description">Description:</label>
+                        <label for="description" class="labelSize"
+                            >Description:</label
+                        >
                         <input
                             v-model="description"
                             type="text"
@@ -32,7 +34,9 @@
                         />
                     </div>
                     <div>
-                        <label for="username">Your name:</label>
+                        <label for="username" class="labelSize"
+                            >Your name:</label
+                        >
                         <input v-model="username" type="text" id="username" />
                     </div>
                 </div>
@@ -124,11 +128,11 @@
             <div class="commSec">
                 <p>Send a comment</p>
                 <div>
-                <label for="usernameComment">Username:</label>
+                <label for="usernameComment" class="labelSizeModal">Username:</label>
                 <input v-model="username" type="text" id="usernameComment" />
                 </div>
                 <div>
-                <label for="commentInput">Comment:</label>
+                <label for="commentInput" class="labelSizeModal">Comment:</label>
                 <input v-model="commentInput" type="text" id="commentInput" />
                 </div>
                 <button @click="sendComment()">Send</button>

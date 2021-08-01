@@ -35,7 +35,7 @@ header {
 header h1 {
     height: fit-content;
     width: fit-content;
-    font-size: 7vh;
+    font-size: 35pt;
     text-align: center;
 }
 
@@ -82,6 +82,7 @@ header h1 {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 .insideAdd input {
@@ -91,9 +92,25 @@ header h1 {
     background: transparent;
     font-size: 17px;
     margin-right: 20px;
+    width: 200px;
+    margin-bottom: 10px;
 }
 .insideAdd input:focus {
     border-color: purple;
+}
+
+.labelSize {
+    display: inline-block;
+    width: fit-content;
+    text-align: left;
+    vertical-align: text-bottom;
+}
+
+.labelSizeModal {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    vertical-align: text-bottom;
 }
 
 #latest {
@@ -326,4 +343,50 @@ button {
     /* 4px */
     margin-right: 0.25em;
     /* 4px */
+}
+
+@media screen and (max-width: 320px) {
+    .labelSize {
+        width: 140px;
+    }
+
+    .insideAdd input {
+        width: 110px;
+    }
+
+    .commSec input {
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .labelSize {
+        width: 140px;
+    }
+
+    .insideAdd input {
+        width: 160px;
+    }
+
+    .commSec input {
+        width: 190px;
+    }
+}
+
+@media screen and (max-width: 405px) {
+    .labelSize {
+        width: 140px;
+    }
+
+    .insideAdd input {
+        width: 110px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .labelSize {
+        display: inline-block;
+        width: 140px;
+        text-align: left;
+    }
 }
