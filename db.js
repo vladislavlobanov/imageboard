@@ -3,9 +3,13 @@ var db = spicedPg("postgres:postgres:postgres@localhost:5432/imageboard");
 
 module.exports.getImages = (arg) => {
     if (!arg) {
-        return db.query(`SELECT * FROM images 
-                    ORDER BY id DESC
-                    LIMIT 6;`);
+        return db.query(`SELECT *, (
+            SELECT id FROM images
+            ORDER BY id ASC
+            LIMIT 1
+            ) AS "lowestId" FROM images 
+            ORDER BY id DESC
+            LIMIT 6;`);
     } else {
         return db.query(
             `SELECT * FROM images 

@@ -35,7 +35,7 @@ exports.upload = (req, res, next) => {
         .then(() => {
             console.log("amazon upload complete");
             // delets file from the local machine
-            // fs.unlink(path, () => {});
+            fs.unlink(path, () => {});
             next();
         })
         .catch((err) => {

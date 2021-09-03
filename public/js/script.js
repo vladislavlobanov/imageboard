@@ -184,7 +184,7 @@
             componentKey: 0,
             showError: false,
             showModal: location.hash.slice(1),
-            showButton: true,
+            showButton: false,
         },
         mounted: function () {
             addEventListener("hashchange", () => {
@@ -195,14 +195,16 @@
                 .get("/images")
                 .then(({ data }) => {
                     this.images = data;
-
-                    // for (var i = 0; i < data.length; i++) {
-                    //     ((i) => {
-                    //         setTimeout(() => {
-                    //             this.images.push(data[i]);
-                    //         }, i * 400);
-                    //     })(i);
-                    // }
+                    for (let i = 0; i < this.images.length; i++) {
+                        if (
+                            this.images[i].id ==
+                            this.images[this.images.length - 1].lowestId
+                        ) {
+                            this.showButton = false;
+                        } else {
+                            this.showButton = true;
+                        }
+                    }
                 })
                 .catch((err) => console.log("err in /images: ", err));
         },
@@ -248,8 +250,10 @@
                         this.username = "";
                         this.title = "";
                         this.description = "";
-                        this.componentKey += 1;
                         this.showError = false;
+                        this.file = "";
+                        this.$refs.fileupload.value = null;
+                        this.componentKey += 1;
                     })
                     .catch((err) => {
                         console.log(err);
@@ -259,11 +263,8 @@
             handleFileSelection: function (e) {
                 this.file = e.target.files[0];
             },
-            // selectImg: function (id) {
-            //     this.showModal = id;
-            // },
+
             insideMainClose: function () {
-                // location.hash = "";
                 history.pushState({}, "", "/");
                 this.showModal = null;
             },
@@ -285,20 +286,14 @@
                             this.images.push(results.data[i]);
                         }
 
-                        // for (var i = 0; i < results.data.length; i++) {
-                        //     ((i) => {
-                        //         setTimeout(() => {
-                        //             this.images.push(results.data[i]);
-                        //         }, i * 200);
-                        //     })(i);
-                        // }
-
                         for (let i = 0; i < this.images.length; i++) {
                             if (
                                 this.images[i].id ==
                                 this.images[this.images.length - 1].lowestId
                             ) {
                                 this.showButton = false;
+                            } else {
+                                this.showButton = true;
                             }
                         }
                     })
@@ -318,7 +313,6 @@
 
         $input.on("change", function (e) {
             var fileName = "";
-
             if (this.files && this.files.length > 1)
                 fileName = (
                     this.getAttribute("data-multiple-caption") || ""
